@@ -1,0 +1,30 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    width: 300px;
+    border: 2px solid #ccc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0);
+    background-color: aquamarine;
+}
+
+.card-body {
+    padding: 20px;
+    background-color:rgb(205, 212, 224)
+}
+
+.card-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-decoration: underline;
+    text-align: center;
+    
+}
+
+.card-text {
+    margin-bottom: 5px;
+   
+}

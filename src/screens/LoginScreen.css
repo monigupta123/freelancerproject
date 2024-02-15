@@ -1,0 +1,80 @@
+
+
+.signinform {
+
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 50px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Styles for the form inside the signup container */
+/* .signinform form {
+    display: flex;
+    flex-direction: column; 
+} */
+
+
+/* Styles for labels */
+.signinform label {
+    font-weight: bold;
+   
+}
+
+/* Styles for text input fields */
+.signinform input[type="text"] {
+    padding: 8px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    
+}
+
+/* Styles for the submit button */
+.signinform button {
+    padding: 10px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    max-width: 100px;
+    margin: 20px;
+    
+   
+}
+
+.signinform button:hover {
+    background-color: #0056b3;
+}
+
+/* Hover styles for the submit button */
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9; /* Fallback color */
+    /* Replace 'background-image.jpg' with the path to your image */
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center; /* Center the background image */
+    font-family: Arial, sans-serif; /* Set a default font family */
+}
+
+/* .reset{
+    color: #007bff;
+    text-align: end;  
+    
+}
+
+.reset button{
+    margin: 0 auto;
+    width: 200px;
+} */
+
+/* .reset button:hover {
+    background-color: #0056b3;
+} */
+
+
