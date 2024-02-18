@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './LoginScreen.css'
 import { signin } from '../actions/userActions'
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,6 +15,7 @@ const LoginScreen = (props) => {
     const {loading,error,response}=userSignin
 
     const dispatch = useDispatch()
+    const Navigate= useNavigate()
 
 
     const onSignin =()=>{
@@ -23,8 +24,8 @@ const LoginScreen = (props) => {
     }
 
     useEffect(()=>{
-            if(response && (response.status=='success')){
-                props.history.push('/home')
+            if(response && (response.status=='201')){
+                // Navigate('/alltraining')
             }
             else if(response && response.status=='error'){
                 alert(response.error)
@@ -43,12 +44,12 @@ const LoginScreen = (props) => {
             <div className="form">
                     <div className='mb-3'>
                         <label className="form-label">Email</label>
-                        <input onChange ={(e)=>{setEmailId(e.target.value)}}type="email" className="form-control" placeholder="Enter your email address" />
+                        <input onChange ={(e)=>{setEmailId(e.target.value)}}type="email" className="form-control" required placeholder="Enter your email address" />
                     </div>
 
                     <div className='mb-3'>
                         <label className='form-label'>Paasword</label>
-                        <input onChange ={(e)=>{setPassword(e.target.value)}}type="text" className='form-control' placeholder="Enter your password" />
+                        <input onChange ={(e)=>{setPassword(e.target.value)}}type="password" className='form-control'required placeholder="Enter your password" />
                     </div>
 
                     <div className='mb-3'>

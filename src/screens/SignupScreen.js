@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import './SignupScreen.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signup } from '../actions/userActions';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -17,15 +17,18 @@ const SignupScreen = (props) => { // Pass props as a parameter
     const [phoneNumber, setPhoneNumber] = useState('');
     const [address, setAddress] = useState('');
     const dispatch = useDispatch();
+    const Navigate = useNavigate();
 
     const userSignup = useSelector((store) => store.userSignup);
     const { loading, response, error } = userSignup;
 
     useEffect(() => { // Correct the syntax of useEffect
         console.log("inside use effect User signup ", userSignup);
-        if (response && response.status =='success') {
-            props.history.push('/signin'); // Use './' for relative path
-            console.log("inside use effect");
+        if (response && response.status =='201') {
+        //    Navigate('/signin')
+            // this.props.history.push('/signin'); // Use './' for relative path
+
+            // console.log("inside use effect");
         } else if (error) {
             console.log(error);
             alert('error while making api call');

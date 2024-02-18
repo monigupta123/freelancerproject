@@ -8,3 +8,12 @@
 nav a{
     text-decoration: none;
 }
+.bg-custom {
+    background-color: rgb(167, 211, 196);
+}
+
+
+.link-custom {
+    color:rgb(137, 45, 45);
+    
+}
