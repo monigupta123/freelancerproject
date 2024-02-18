@@ -1,38 +1,52 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './LoginScreen.css'
-import { signin } from '../actions/userActions'
-import { useDispatch, useSelector } from 'react-redux'
-
+import axios from "axios"
 
 const LoginScreen = (props) => {
     const [email,setEmailId] = useState('')
     const [password,setPassword] =useState('')
-
-    const userSignin = useSelector(store =>store.userSignin)
-
-    const {loading,error,response}=userSignin
-
-    const dispatch = useDispatch()
-
+    const [apiResponse, setApiResponse] = useState()
+    const [loading, setLoading] = useState()
+    const navigate = useNavigate();
+    const [signedIn, setSignedIn] = useState()
 
     const onSignin =()=>{
-        dispatch(signin(email,password))
-
+        signin(email,password)
     }
 
+    const signin = (emailId,password)=>{
+       
+            const header = {
+                headers: {
+                    'Content-Type':'application/json',
+                },
+            }
+            const body = {
+                emailId,
+                password,
+            }
+            const url = 'http://localhost:8070/freelancer/login'
+            axios
+                .post(url,body,header)
+                .then((response) =>{
+                   setApiResponse(response.data)
+                   setLoading(false)
+                   setSignedIn(true)
+                   console.log("Response received ", response.data)
+                })
+                .catch((error) =>{
+                    console.log("Error response received ", error)
+            })
+    }
+    
+
     useEffect(()=>{
-            if(response && (response.status=='success')){
-                props.history.push('/home')
-            }
-            else if(response && response.status=='error'){
-                alert(response.error)
-            }
-            else if(error){
-                alert(error)
-            }
-    },[loading,error,response])
+        if (apiResponse) {
+            navigate('/home',  { state: { userProfile: apiResponse, userLogged: signedIn  } })
+        }
+    },[apiResponse])
 
 
     return (

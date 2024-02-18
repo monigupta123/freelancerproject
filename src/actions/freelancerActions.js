@@ -14,7 +14,7 @@ export const getFreelancer = () =>{
     }
 
 
-    const url = 'http://localhost:8080/freelancer'
+    const url = 'http://localhost:8070/freelancer'
     axios
         .get(url,header)
         .then((response) =>{

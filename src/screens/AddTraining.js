@@ -3,6 +3,7 @@ import Header from "../components/Header"
 import './AddTraining.css'
 import { useDispatch,useSelector } from "react-redux"
 import { addtraining } from "../actions/trainingActions"
+import { Link } from "react-router-dom";
 
 
 const AddTraining = (props) => {
@@ -93,7 +94,7 @@ const AddTraining = (props) => {
 
                     <div className='mb-3'>
                         <button  onClick={onAdd} className="btn btn-success">Add Training</button>
-                        <button className="btn btn-danger float-end">cancel</button>
+                        <Link to = "/home"><button className="btn btn-danger float-end">cancel</button></Link>
                     </div>
 
                 </div>

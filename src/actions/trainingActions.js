@@ -17,7 +17,7 @@ export const addtraining = (freelancerId,trainingName,trainingCategory,trainingP
         freelancerId,trainingName,trainingCategory,trainingPrice,trainingStartTime,trainingEndTime,trainingDuration,trainingDescription,
     
     }
-    const url = 'http://localhost:8080/training'
+    const url = 'http://localhost:8070/training'
     console.log("body data",body)
     axios
         .post(url,body,header)
@@ -52,7 +52,7 @@ export const getTraining = () =>{
     }
 
 
-    const url = 'http://localhost:8080/training'
+    const url = 'http://localhost:8070/training'
     axios
         .get(url,header)
         .then((response) =>{

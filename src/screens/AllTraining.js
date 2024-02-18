@@ -15,7 +15,7 @@ const AllTraining = (props) => {
 
     return (
        <div>
-            <Header title="All Training" />
+            
             
             <div className="row row-cols-1 row-cols-md-3 g-4">
                 {response &&

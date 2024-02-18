@@ -7,13 +7,11 @@ export const signup = (firstName,lastName,emailId,password,phoneNumber,address)=
         dispatch({
             type:USER_SIGNUP_REQUEST,
         })
-
         const header = {
             headers: {
                 'Content-Type':'application/json',
             },
         }
-
         const body ={
             firstName,
             lastName,
@@ -23,14 +21,17 @@ export const signup = (firstName,lastName,emailId,password,phoneNumber,address)=
             address,
 
         }
-        const url = 'http://localhost:8080/freelancer'
+        const url = 'http://localhost:8070/freelancer'
         axios
             .post(url,body,header)
             .then((response) =>{
                 dispatch({
                     type: USER_SIGNUP_SUCCESS,
                     // payload: {data: response.data, status: 'success'}
-                    payload: response
+                    payload: {
+                        response,
+                        status: 'success'
+                    }
                 })
             })
             .catch((error) =>{
@@ -49,21 +50,16 @@ export const signin = (emailId,password)=>{
         dispatch({
             type:USER_SIGNIN_REQUEST,
         })
-
         const header = {
             headers: {
                 'Content-Type':'application/json',
             },
         }
-
         const body ={
-            
             emailId,
             password,
-            
-
         }
-        const url = 'http://localhost:8080/freelancer'
+        const url = 'http://localhost:8070/freelancer'
         axios
             .post(url,body,header)
             .then((response) =>{

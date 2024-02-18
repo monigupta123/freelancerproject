@@ -4,7 +4,8 @@ import Header from '../components/Header'
 const AboutScreen = (props)=>{
     return (
     <div>
-        <Header title='About'/>
+        <Header title='About Screen'/>
+
     </div>
     )
 }

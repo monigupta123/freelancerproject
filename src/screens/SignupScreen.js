@@ -1,44 +1,62 @@
 import { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import './SignupScreen.css';
-import { Link } from 'react-router-dom';
-import { signup } from '../actions/userActions';
-import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from "axios"
 
-const SignupScreen = (props) => { // Pass props as a parameter
-
-    console.log("props data", props)
-   
-
+const SignupScreen = () => { 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [emailId, setEmailId] = useState('');
     const [password, setPassword] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [address, setAddress] = useState('');
-    const dispatch = useDispatch();
+    
+    const [apiResponse, setApiResponse] = useState();
+    
+    const navigate = useNavigate();
 
-    const userSignup = useSelector((store) => store.userSignup);
-    const { loading, response, error } = userSignup;
-
-    useEffect(() => { // Correct the syntax of useEffect
-        console.log("inside use effect User signup ", userSignup);
-        if (response && response.status =='success') {
-            props.history.push('/signin'); // Use './' for relative path
-            console.log("inside use effect");
-        } else if (error) {
-            console.log(error);
-            alert('error while making api call');
+    useEffect(() => {
+        console.log("inside use effect User signup ", apiResponse);
+        if (apiResponse) {
+            navigate('/signin');
         }
-    }, [loading, response, error,props.history,userSignup]); // Add props.history to dependencies array
+    }, [apiResponse,navigate]);
 
     const onSignup = () => {
-        dispatch(signup(firstName, lastName, emailId, password, phoneNumber, address));
+        signupEvent(firstName, lastName, emailId, password, phoneNumber, address);
     }
 
+    const signupEvent = (firstName,lastName,emailId,password,phoneNumber,address)=>{
+            const header = {
+                headers: {
+                    'Content-Type':'application/json',
+                },
+            }
+            const body ={
+                firstName,
+                lastName,
+                emailId,
+                password,
+                phoneNumber,
+                address,
+    
+            }
+            const url = 'http://localhost:8070/freelancer'
+            axios
+                .post(url,body,header)
+                .then((response) =>{
+                    setApiResponse(response.data)
+                    console.log("User created ", response)
+                })
+                .catch((error) =>{
+                    console.log("Error received ", error)
+                })
+            }
+    
     return (
         <div>
-            <Header title='Signup'/>
+            <Header title='Freelancer Signup'/>
             <div className='form'>
                 <div className="signupform">
                     <div className='mb-3'>
@@ -72,7 +90,7 @@ const SignupScreen = (props) => { // Pass props as a parameter
                     </div>
 
                     <div className= 'signupbtn'>
-                        <button onClick={onSignup}>SignUp</button>
+                        <button onClick={onSignup}>Register</button>
                     </div>
 
                     <div className='signinbtn'>
@@ -81,9 +99,9 @@ const SignupScreen = (props) => { // Pass props as a parameter
                     </div>
                 </div>
             </div>
-            { loading && <div> Waiting for result </div>}
+            {/* { loading && <div> Waiting for result </div>} */}
         </div>
     )
 }
 
-export default SignupScreen; // Remove 'from where props coming in signup'
+export default SignupScreen;
